@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Sistema.Views.MainWindow"
+        Title="INSIDE-TECH"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen">
+    
+    <ContentControl x:Name="ConteudoPrincipal" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch" 
+                    VerticalContentAlignment="Stretch"/>
+    
+</Window>

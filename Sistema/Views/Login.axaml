@@ -1,0 +1,125 @@
+<UserControl 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Class="Sistema.Views.Login"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch">
+
+    <UserControl.Styles>
+        <Style Selector="Border.PainelSutil">
+            <Setter Property="Background" Value="#120E22"/>
+            <Setter Property="BorderBrush" Value="#2D2258"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BoxShadow" Value="0 10 30 #040208"/>
+        </Style>
+
+        <Style Selector="Button.BotaoPadrao">
+            <Setter Property="Background" Value="#4A3B8C"/>
+            <Setter Property="Foreground" Value="#EFEFFF"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12,12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.BotaoPadrao:pointerover">
+            <Setter Property="Background" Value="#6552BF"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#07050D">
+
+        <Border
+            x:Name="PainelLogin"
+            Width="520"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Classes="PainelSutil"
+            Padding="45"
+            IsVisible="True">
+
+            <StackPanel Spacing="24">
+                <StackPanel Spacing="6" HorizontalAlignment="Center">
+                    <TextBlock Text="✦ ACESSO" Foreground="#00F0FF" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
+                    <TextBlock Text="ENGENHARIA DE COMPUTAÇÃO • FEC 2026" Foreground="#857BB8" FontSize="11" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <Border Height="1" Background="#251C44" Margin="0,4"/>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="NOME DE OPERADOR:" Foreground="#C7C1EF" FontWeight="SemiBold" FontSize="12"/>
+                    <TextBox x:Name="TxtNomeUsuario" PlaceholderText="Digite seu codinome..." Background="#07040E" Foreground="#FFFFFF" BorderBrush="#2D2258" CornerRadius="8" Padding="14,12" FontSize="14" VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Spacing="12" Margin="0,8,0,0">
+                    <Button x:Name="BotaoEntrar" Content="ACESSAR SISTEMA" Classes="BotaoPadrao" Background="#1D4ED8" HorizontalAlignment="Stretch" FontSize="13" Padding="0,14"/>
+                    
+                    <Button x:Name="BotaoIrParaCriar" Content="REGISTRAR NOVO OPERADOR" Classes="BotaoPadrao" Background="Transparent" BorderBrush="#3B2A6E" Foreground="#00F0FF" HorizontalAlignment="Stretch" FontSize="13" Padding="0,14"/>
+                </StackPanel>
+
+                <TextBlock x:Name="TxtStatusLogin" Text="" Foreground="#FF9999" FontSize="12" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <Border
+            x:Name="PainelCriarUsuario"
+            Width="520"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Classes="PainelSutil"
+            Padding="45"
+            IsVisible="False">
+
+            <StackPanel Spacing="22">
+                
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    <Button x:Name="BotaoVoltarLogin" 
+                        Content="←" 
+                        Classes="BotaoPadrao" 
+                        Background="#1A1430" 
+                        Foreground="#00F0FF" 
+                        BorderBrush="#3B2A6E" 
+                        Width="36" Height="36" 
+                        CornerRadius="8" 
+                        Padding="0" 
+                        HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center"
+                        FontSize="16"
+                        Click="BotaoVoltarLogin_Click"
+                        ToolTip.Tip="Voltar ao Login"/>
+
+                    <StackPanel Grid.Column="1" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="✦ NOVO OPERADOR" Foreground="#00F0FF" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"/>
+                        <TextBlock Text="CADASTRO RÁPIDO NO SISTEMA" Foreground="#857BB8" FontSize="11" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+                <Border Height="1" Background="#251C44" Margin="0,4"/>
+
+                <CheckBox 
+                    x:Name="CheckCriarAleatorio"
+                    Content="Gerar codinome aleatório"
+                    Foreground="#C7C1EF"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Margin="0,0,0,2"/>
+
+                <StackPanel Spacing="8">
+                    <TextBlock Text="NOME DO NOVO OPERADOR:" Foreground="#C7C1EF" FontWeight="SemiBold" FontSize="12"/>
+                    <TextBox x:Name="TxtNovoUsuario" PlaceholderText="Escolha um codinome..." Background="#07040E" Foreground="#FFFFFF" BorderBrush="#2D2258" CornerRadius="8" Padding="14,12" FontSize="14" VerticalContentAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Spacing="12" Margin="0,8,0,0">
+                    <Button x:Name="BotaoSalvarUsuario" Content="CADASTRAR OPERADOR" Classes="BotaoPadrao" Background="#10B981" Foreground="#042F1E" HorizontalAlignment="Stretch" FontSize="13" Padding="0,14"/>
+                </StackPanel>
+
+                <TextBlock x:Name="TxtStatusRegistro" Text="" Foreground="#10B981" FontSize="12" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</UserControl>
