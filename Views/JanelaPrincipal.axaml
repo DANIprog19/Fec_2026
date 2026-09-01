@@ -1,0 +1,653 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="using:Sistema.Views"
+             xmlns:models="using:Sistema.Models"
+             x:Class="Sistema.Views.JanelaPrincipal"
+             x:DataType="views:JanelaPrincipal"
+             Background="#07050D">
+
+    <UserControl.Styles>
+        <Style Selector="Border.PainelSutil">
+            <Setter Property="Background" Value="#120E22"/>
+            <Setter Property="BorderBrush" Value="#2D2258"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BoxShadow" Value="0 6 16 #040208"/>
+        </Style>
+
+        <Style Selector="Button.BotaoPadrao">
+            <Setter Property="Background" Value="#4A3B8C"/>
+            <Setter Property="Foreground" Value="#EFEFFF"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.BotaoPadrao:pointerover">
+            <Setter Property="Background" Value="#6552BF"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+
+        <Style Selector="Button.BotaoCircular">
+            <Setter Property="Background" Value="#58358C"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style Selector="Button.BotaoCircular:pointerover">
+            <Setter Property="Background" Value="#7345B8"/>
+        </Style>
+
+        <Style Selector="TabItem">
+            <Setter Property="Foreground" Value="#9A90D0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="14,8"/>
+        </Style>
+        <Style Selector="TabItem:selected">
+            <Setter Property="Foreground" Value="#00F0FF"/>
+        </Style>
+
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto, *">
+        
+        <Border Grid.Row="0" Background="#0D091B" Padding="12,14" BorderBrush="#251C44" BorderThickness="0,0,0,1">
+<Grid>
+
+
+    <StackPanel
+        Orientation="Horizontal"
+        Spacing="10"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Left">
+
+        <Button
+            x:Name="BotaoVoltarLoginPrincipal"
+            Content="←"
+            Classes="BotaoPadrao"
+            Background="#1A1430"
+            Foreground="#00F0FF"
+            BorderBrush="#3B2A6E"
+            Width="36"
+            Height="36"
+            CornerRadius="8"
+            Padding="0"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="16"
+            Click="BotaoVoltarLoginPrincipal_Clique"
+            ToolTip.Tip="Retornar ao Login"/>
+
+        <Border
+            Background="#1C1438"
+            CornerRadius="6"
+            Padding="8,4"
+            BorderBrush="#3B2A6E"
+            BorderThickness="1">
+
+            <TextBlock
+                Text="✦ SISTEMA"
+                Foreground="#00F0FF"
+                FontSize="11"
+                FontWeight="Bold"
+                VerticalAlignment="Center"/>
+        </Border>
+
+        <TextBlock
+            Text="VISÃO COMPUTACIONAL"
+            Foreground="#8B82C9"
+            FontSize="11"
+            VerticalAlignment="Center"
+            FontWeight="SemiBold"/>
+
+    </StackPanel>
+
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Spacing="2">
+
+        <TextBlock
+            Text="ENGENHARIA DE COMPUTAÇÃO"
+            Foreground="#F0EEFF"
+            FontSize="15"
+            FontWeight="ExtraBold"
+            HorizontalAlignment="Center"
+            TextAlignment="Center"/>
+
+        <TextBlock
+            Text="INSIDETECH © 2026"
+            Foreground="#857BB8"
+            FontSize="10"
+            HorizontalAlignment="Center"
+            TextAlignment="Center"/>
+
+    </StackPanel>
+
+</Grid>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="330, *, 380" Margin="10">
+
+            <StackPanel Grid.Column="0" Spacing="8" Margin="0,0,8,0">
+                
+                <Border Classes="PainelSutil" Padding="12">
+                    <StackPanel Spacing="10">
+                         <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock
+                                Text="CÂMERA"
+                                Foreground="#9C92D9"
+                                FontSize="10"
+                                FontWeight="Bold"
+                                VerticalAlignment="Center"/>
+
+                            <Button
+                                Grid.Column="1"
+                                Content="✕"
+                                Click="ExcluirImagem_Clique"
+                                Background="#4A1525"
+                                Foreground="#FF9999"
+                                FontSize="16"
+                                Width="28"
+                                Height="28"
+                                CornerRadius="14"
+                                Padding="0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                ToolTip.Tip="Excluir Captura"/>
+                        </Grid>
+
+                        <Border
+                            Height="220"
+                            Background="#05030A"
+                            CornerRadius="6"
+                            ClipToBounds="True"
+                            BorderBrush="#251C44"
+                            BorderThickness="1">
+
+                            <Grid>
+
+                                <Image
+                                    x:Name="ExibicaoImagemCapturada"
+                                    Stretch="Uniform"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+
+                                <Canvas x:Name="CanvasScanner" ClipToBounds="True" IsHitTestVisible="False">
+
+                                    <Border
+                                        x:Name="FaixaScannerGlow"
+                                        Height="20"
+                                        Background="#5539FF88"
+                                        IsVisible="False"
+                                        Canvas.Left="0"
+                                        Canvas.Top="-10"
+                                        IsHitTestVisible="False"/>
+
+                                    <Border
+                                        x:Name="FaixaScanner"
+                                        Height="4"
+                                        Background="#39FF88"
+                                        IsVisible="False"
+                                        Canvas.Left="0"
+                                        Canvas.Top="0"
+                                        IsHitTestVisible="False">
+
+                                        <Border.Effect>
+                                            <DropShadowEffect
+                                                Color="#39FF88"
+                                                BlurRadius="16"
+                                                Opacity="1"
+                                                OffsetX="0"
+                                                OffsetY="0"/>
+                                        </Border.Effect>
+
+                                    </Border>
+
+                                </Canvas>
+
+                            </Grid>
+
+                        </Border>
+
+                        <Grid ColumnDefinitions="Auto, *" Margin="0,2,0,0">
+                            <Button Click="CapturarImagem_Clique" Classes="BotaoCircular" ToolTip.Tip="Tirar Foto">
+                                <Image Source="avares://Sistema/Assets/camera.png"
+                                    Width="38"
+                                    Height="38"
+                                    VerticalAlignment="Center"/>
+                            </Button>
+                            <TextBlock Grid.Column="1" Text="Toque para capturar imagem rápida" Foreground="#857BB8" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                        </Grid>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Dar dica a IA do objeto:" Foreground="#C7C1EF" FontSize="10"/>
+                            <Grid ColumnDefinitions="*, Auto">
+                                <TextBox x:Name="CampoDicaContexto" PlaceholderText="Ex: componente..." Background="#07040E" Foreground="#FFFFFF" BorderBrush="#2D2258" CornerRadius="6" FontSize="10" Height="26" VerticalContentAlignment="Center"/>
+                                <Button Grid.Column="1" Content="Enviar" x:Name="BotaoEnviarDica" Click="EnviarDicaManual_Clique" Classes="BotaoPadrao" Margin="4,0,0,0" FontSize="10"/>                            </Grid>
+                        </StackPanel>
+
+                        <Button Content="SCANEAR"  x:Name="BotaoAnalisarImagem" Click="AnalisarImagem_Clique" Classes="BotaoPadrao" Background="#1D4ED8" HorizontalAlignment="Stretch" Margin="0,2,0,0" FontSize="11"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="PainelSutil" Padding="12">
+                    <StackPanel Spacing="10">
+                        
+                        <StackPanel Spacing="5">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <TextBlock Text="RADAR" Foreground="#10B981" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <Border Grid.Column="1" Background="#0A1A12" CornerRadius="4" Padding="5,2" BorderBrush="#10B981" BorderThickness="1">
+                                    <TextBlock Text="ALVO" Foreground="#13FF33" FontSize="9" FontWeight="Bold"/>
+                                </Border>
+                            </Grid>
+                            
+                           <Border Background="#020804" CornerRadius="6" Height="125" ClipToBounds="True" BorderBrush="#10B981" BorderThickness="1">
+                                <Grid>
+                                    <Canvas Background="Transparent">
+                                        
+                                       
+                                        <Canvas x:Name="NaveEspacialMovel" Canvas.Left="-60" Canvas.Top="30">
+                                            <Canvas.RenderTransform>
+                                                <ScaleTransform ScaleX="2.0" ScaleY="2.0"/>
+                                            </Canvas.RenderTransform>
+                                            
+                                            <Canvas.Transitions>
+                                                <Transitions>
+                                                    <DoubleTransition Property="Opacity" Duration="0:0:0.3"/>
+                                                </Transitions>
+                                            </Canvas.Transitions>
+
+                                           
+                                            <Polygon Points="9,3 27,15 12,21" Fill="#0F5132"/>
+                                            <Polygon Points="9,33 27,21 12,15" Fill="#0F5132"/>
+                                            <Polygon Points="3,18 18,12 42,18 18,24" Fill="#13FF33"/>
+                                            <Polygon Points="21,16.5 30,18 21,19.5" Fill="#00F0FF"/>
+                                            <Polygon Points="3,15 -6,18 3,21" Fill="#00F0FF"/>
+                                            <Polygon Points="-8,18 -16,15 -12,18 -16,21" Fill="#00F0FF" Opacity="0.7"/>
+                                        </Canvas>
+
+                                       
+                                        <Line StartPoint="0,62" EndPoint="320,62" Stroke="#0D3B22" StrokeThickness="1" StrokeDashArray="4,4"/>
+                                        <Line StartPoint="150,0" EndPoint="150,125" Stroke="#0D3B22" StrokeThickness="1" StrokeDashArray="4,4"/>
+                                        
+                                       
+                                        <Ellipse x:Name="AlvoExterno" Width="80" Height="80" Canvas.Left="95" Canvas.Top="22" Stroke="#0F4C2A" StrokeThickness="1"/>
+                                        <Ellipse x:Name="AlvoInterno" Width="40" Height="40" Canvas.Left="115" Canvas.Top="42" Stroke="#0F4C2A" StrokeThickness="0.8"/>
+                                        
+                                        <TextBlock Text="ZONA-FEC" Foreground="#10B981" FontSize="9" FontWeight="Bold" Canvas.Left="8" Canvas.Top="110"/>
+                                    </Canvas>
+                                    
+                                    <TextBlock Text="PROCURANDO STAND" Foreground="#13FF33" FontSize="9" Margin="6,4" FontFamily="Consolas, Monospace" FontWeight="Bold" Opacity="0.9"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+
+                        <Border Height="1" Background="#251C44"/>
+
+                        
+                        <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto">
+                            <TextBlock Text="DADOS:" Foreground="#8E85C9" FontSize="11" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="TextoEspecificacoesHardware" Grid.Column="1" Text="98.4%" Foreground="#00F0FF" FontSize="11" FontWeight="Bold"/>
+                        </Grid>
+
+                        <Border Height="1" Background="#251C44"/>
+
+                       
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="DASHBOARD DO HARDWARE" Foreground="#00F0FF" FontSize="11" FontWeight="Bold"/>
+
+                            
+                            <StackPanel Spacing="3">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <TextBlock Text="Processamento CPU" Foreground="#8E85C9" FontSize="10" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtCpuValor" Grid.Column="1" Text="0%" Foreground="#A7F3D0" FontSize="10" FontWeight="Bold"/>
+                                </Grid>
+                                <ProgressBar x:Name="BarraCpu" Value="0" Maximum="100" Height="4" Background="#080510" Foreground="#00F0FF"/>
+                            </StackPanel>
+
+                            
+                            <StackPanel Spacing="3">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <TextBlock Text="Alocação VRAM" Foreground="#8E85C9" FontSize="10" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="TxtMemoriaValor" Grid.Column="1" Text="0 / 0 GB" Foreground="#E0DFFF" FontSize="10" FontWeight="Bold"/>
+                                </Grid>
+                                <ProgressBar x:Name="BarraMemoria" Value="0" Maximum="100" Height="4" Background="#080510" Foreground="#7C3AED"/>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+
+            <Border Grid.Column="1" Classes="PainelSutil" Margin="4,0" Padding="8">
+                <TabControl>
+                   
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Image Source="/Assets/controle2.png"
+                                    Width="35"
+                                    Height="35"
+                                    Stretch="Uniform"
+                                    VerticalAlignment="Center"/>
+
+                                <TextBlock
+                                    Text="JOGO"
+                                    Foreground="White"
+                                    VerticalAlignment="Center"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid RowDefinitions="Auto, *, Auto" Margin="4">
+                            <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,8">
+                                <TextBlock Text="AMBIENTE INTERATIVO FEC 2026" Foreground="#9C92D9" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <Border Grid.Column="1" Background="#1D1735" CornerRadius="6" Padding="10,4" BorderBrush="#3B2A6E" BorderThickness="1">
+                                    <TextBlock x:Name="TextoObjetoIdentificado" Text="STATUS: PRONTO" Foreground="#00F0FF" FontSize="11" FontWeight="Bold"/>
+                                </Border>
+                            </Grid>
+
+                            <Border Grid.Row="1" Background="#05030A" CornerRadius="8" ClipToBounds="True" BorderBrush="#251C44" BorderThickness="1">
+                               
+                                <ContentControl x:Name="AreaConteudoJogo">
+                                    <Grid>
+                                        <Image x:Name="ExibicaoVisualizacaoTecnica" Stretch="Uniform" Opacity="0.95"/>
+                                        <TextBlock x:Name="TextoEstadoCentral" Text="Carregando módulos gráficos galácticos..." 
+                                                Foreground="#6B5E9E" HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic"/>
+                                    </Grid>
+                                </ContentControl>
+                            </Border>
+
+                            <Grid Grid.Row="2" ColumnDefinitions="*, Auto" Margin="0,8,0,0">
+                                <TextBlock Text="INSIDE GAME" Foreground="#6B5E9E" FontSize="10" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+
+                   
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Image Source="/Assets/ranking.png"
+                                    Width="25"
+                                    Height="25"
+                                    Stretch="Uniform"
+                                    VerticalAlignment="Center"/>
+
+                                <TextBlock
+                                    Text="PONTUAÇÕES"
+                                    Foreground="White"
+                                    VerticalAlignment="Center"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                      VerticalScrollBarVisibility="Auto">
+                            <Grid Margin="16" RowDefinitions="Auto,Auto">
+                                <Border Grid.Row="1"
+                                        Background="#13102B"
+                                        CornerRadius="18"
+                                        Padding="24"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch">
+                                    <StackPanel Spacing="20">
+
+                                      
+                                        <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                                            <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="4">
+                                                <TextBlock Text="Ranking de Vencedores"
+                                                           Foreground="White"
+                                                           FontSize="20"
+                                                           FontWeight="Bold"/>
+                                                <TextBlock Text="Placar dos usuários com mais pontos"
+                                                           Foreground="#8C86BA"
+                                                           FontSize="12"/>
+                                            </StackPanel>
+
+                                            <Border Grid.Column="1"
+                                                    Background="#1A153B"
+                                                    BorderBrush="#322C66"
+                                                    BorderThickness="1"
+                                                    CornerRadius="10"
+                                                    Padding="10,8">
+                                                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                                    <Image Source="avares://Sistema/Assets/trofeu.png"
+                                                           Width="30"
+                                                           Height="30"
+                                                           VerticalAlignment="Center"/>
+
+                                                    <StackPanel VerticalAlignment="Center" Spacing="1">
+                                                        <TextBlock Text="Exibir no Pódio"
+                                                                   Foreground="White"
+                                                                   FontSize="12"
+                                                                   FontWeight="SemiBold"/>
+                                                        <TextBlock Text="Quantidade de usuários"
+                                                                   Foreground="#8C86BA"
+                                                                   FontSize="10"/>
+                                                    </StackPanel>
+
+                                                    <NumericUpDown x:Name="NumRankingPontuacoes"
+                                                                   Value="5"
+                                                                   Minimum="1"
+                                                                   Maximum="20"
+                                                                   Increment="1"
+                                                                   FormatString="N0"
+                                                                   Width="100"
+                                                                   Height="30"
+                                                                   ValueChanged="NumRankingPontuacoes_ValorChanged"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+
+                                        <Border Height="1" Background="#221D47" Margin="0,2"/>
+
+                                       
+                                        <Border Background="#151030"
+                                                BorderBrush="#2A2254"
+                                                BorderThickness="1"
+                                                CornerRadius="16"
+                                                Padding="16">
+                                            <ItemsControl ItemsSource="{Binding ListaPontuacoesUsuarios}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate x:DataType="models:UsuarioPontuacaoModel">
+                                                        <Border Width="185"
+                                                                Margin="10"
+                                                                Padding="14,16"
+                                                                CornerRadius="16"
+                                                                BorderBrush="{Binding CorDestaque}"
+                                                                BorderThickness="1.5"
+                                                                BoxShadow="0 10 25 -3 #80000000">
+                                                            
+                                                            <Border.Background>
+                                                                <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                                                                    <GradientStop Color="#30266B" Offset="0.0"/>
+                                                                    <GradientStop Color="#1A133D" Offset="1.0"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+
+                                                            <StackPanel Spacing="10" HorizontalAlignment="Center">
+                                                               
+                                                                <Border Background="#2E1C11" 
+                                                                        BorderBrush="#8C4A26" 
+                                                                        BorderThickness="1.2" 
+                                                                        CornerRadius="5" 
+                                                                        Padding="8,2"
+                                                                        HorizontalAlignment="Center"
+                                                                        IsVisible="{Binding IsEmpatado}">
+                                                                    <TextBlock Text="✦ EMPATADO"
+                                                                               Foreground="#FF9F68"
+                                                                               FontWeight="Bold"
+                                                                               FontSize="9.5"
+                                                                               TextAlignment="Center"/>
+                                                                </Border>
+
+                                                                
+                                                           <Border Width="120"
+                                                                Height="120"
+                                                                CornerRadius="59"
+                                                                ClipToBounds="True"
+                                                                BorderBrush="{Binding CorDestaque}"
+                                                                BorderThickness="2"
+                                                                HorizontalAlignment="Center">
+
+                                                            <Image Source="{Binding FotoBitmap}"
+                                                                Stretch="UniformToFill"
+                                                                HorizontalAlignment="Stretch"
+                                                                VerticalAlignment="Stretch"/>
+
+                                                        </Border>
+                                                                
+                                                                <StackPanel Spacing="2" HorizontalAlignment="Center">
+
+                                                                        <TextBlock
+                                                                            Text="{Binding Nome}"
+                                                                            Foreground="White"
+                                                                            FontWeight="Bold"
+                                                                            FontSize="13"
+                                                                            TextAlignment="Center"
+                                                                            TextWrapping="Wrap"
+                                                                            MaxHeight="36"/>
+
+                                                                        <TextBlock
+                                                                            Text="{Binding Setor, StringFormat='OBJETO: {0}'}"
+                                                                            Foreground="#A49FE5"
+                                                                            FontSize="10.5"
+                                                                            TextAlignment="Center"
+                                                                            TextWrapping="Wrap"/>
+
+                                                                    </StackPanel>
+
+                                                                    <Border
+                                                                        Background="#120C29"
+                                                                        BorderBrush="#3D3278"
+                                                                        BorderThickness="1"
+                                                                        CornerRadius="10"
+                                                                        Padding="10,5"
+                                                                        HorizontalAlignment="Center">
+
+                                                                        <StackPanel
+                                                                            Orientation="Horizontal"
+                                                                            Spacing="4"
+                                                                            VerticalAlignment="Center">
+
+                                                                            <TextBlock
+                                                                                Text="{Binding Pontos}"
+                                                                                Foreground="#00F584"
+                                                                                FontSize="13"
+                                                                                FontWeight="Bold"/>
+
+                                                                            <TextBlock
+                                                                                Text="pts"
+                                                                                Foreground="#8C83C9"
+                                                                                FontSize="10"
+                                                                                VerticalAlignment="Bottom"
+                                                                                Margin="0,0,0,1"/>
+
+                                                                        </StackPanel>
+                                                                    </Border>
+
+                                                                    <TextBlock
+                                                                        Text="{Binding DataHoraJogada}"
+                                                                        Foreground="#7B72B8"
+                                                                        FontSize="9"
+                                                                        TextAlignment="Center"
+                                                                        HorizontalAlignment="Center"
+                                                                        Margin="0,2,0,0"/>
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Border>
+
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Border>
+
+           
+            <ScrollViewer Grid.Column="2" Margin="8,0,0,0">
+                <StackPanel Spacing="10">
+                    
+                    <Border Classes="PainelSutil" Padding="10">
+                        <Grid RowDefinitions="Auto, 90">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <TextBlock Text="VOZ IA" Foreground="#9C92D9" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <Border Grid.Column="1" Background="#112E22" CornerRadius="4" Padding="6,2" >
+                                    <TextBlock Text="ATIVO" Foreground="#10B981" FontSize="9" FontWeight="Bold"/>
+                                </Border>
+                            </Grid>
+                            <Canvas
+                                x:Name="CanvasOndasVoz"
+                                Grid.Row="1"
+                                Background="#05030A"
+                                ClipToBounds="True"
+                                Margin="0,6,0,0">
+
+                                <Path
+                                    x:Name="DesenhoOndaVozIA"
+                                    Stroke="#00F0FF"
+                                    StrokeThickness="2"
+                                    Data="M 0,45 L 300,45"/>
+                            </Canvas>
+                        </Grid>
+                    </Border>
+
+<Border Classes="PainelSutil" Height="470">
+    <Grid RowDefinitions="Auto, *">
+        <!-- Título na Linha 0 -->
+        <TextBlock Grid.Row="0" Text="TRILHA SONORA GALÁCTICA" Foreground="#00F0FF" FontSize="11" FontWeight="Bold" Margin="10,10,10,6"/>
+        
+        <!-- Área de Conteúdo na Linha 1 com Padding para afastar a barra de rolagem -->
+        <Grid Grid.Row="1" RowDefinitions="*, Auto" Margin="4,0,4,6">
+            
+            <!-- ScrollViewer ocupando o meio -->
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="0,0,2,0">
+                <StackPanel x:Name="PainelListaMusicas" Spacing="6" Margin="0,0,4,0">
+                    <!-- Seus itens da lista entram aqui -->
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Botões fixos na parte inferior interna, perfeitamente isolados da rolagem -->
+            <Border Grid.Row="1" Background="#0B0814" CornerRadius="8" Padding="10" BorderBrush="#251C44" BorderThickness="1" Margin="0,6,0,0">
+                <Grid ColumnDefinitions="*, Auto">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                        <Button x:Name="BotaoAnterior" Click="BotaoAnterior_Clique" Content="⏮" Classes="BotaoPadrao" Padding="12,8" FontSize="14" ToolTip.Tip="Anterior"/>
+                        <Button x:Name="BotaoPlayPause" Click="BotaoPlayPause_Clique" Content="⏸" Classes="BotaoPadrao" Background="#6552BF" Padding="16,8" FontSize="14" ToolTip.Tip="Play / Pause"/>
+                        <Button x:Name="BotaoProxima" Click="BotaoProxima_Clique" Content="⏭" Classes="BotaoPadrao" Padding="12,8" FontSize="14" ToolTip.Tip="Próxima"/>
+                    </StackPanel>
+                    <Button Grid.Column="1" Click="BotaoMute_Clique" Content="🔊" Classes="BotaoPadrao" Background="#2A1E42" Padding="12,8" FontSize="14" ToolTip.Tip="Cortar Som (Mute)"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+</Border>
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</UserControl>

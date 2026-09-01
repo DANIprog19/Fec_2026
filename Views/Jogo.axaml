@@ -1,0 +1,339 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Sistema.Views.Jogo">
+
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush Center="50%,40%" GradientOrigin="50%,40%" RadiusX="0.85" RadiusY="0.85">
+                <GradientStop Color="#1E0A38" Offset="0"/>
+                <GradientStop Color="#0A0E24" Offset="0.5"/>
+                <GradientStop Color="#030308" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+
+        <Canvas IsHitTestVisible="False" Opacity="0.7">
+            <Ellipse Width="2" Height="2" Fill="White" Canvas.Left="40" Canvas.Top="80"/>
+            <Ellipse Width="3" Height="3" Fill="#00FFFF" Canvas.Left="150" Canvas.Top="220" Opacity="0.9"/>
+            <Ellipse Width="2" Height="2" Fill="#FF00AA" Canvas.Left="80" Canvas.Top="450" Opacity="0.6"/>
+            <Ellipse Width="3" Height="3" Fill="White" Canvas.Left="350" Canvas.Top="550"/>
+            <Ellipse Width="2" Height="2" Fill="#00FFFF" Canvas.Left="550" Canvas.Top="120" Opacity="0.5"/>
+            <Ellipse Width="3" Height="3" Fill="#FF00AA" Canvas.Left="700" Canvas.Top="380" Opacity="0.8"/>
+        </Canvas>
+
+        <Canvas x:Name="GameCanvas" ClipToBounds="True">
+            <Border
+                x:Name="PainelPausa"
+                IsVisible="False"
+                Background="#DD080812"
+                BorderBrush="#00F0FF"
+                BorderThickness="2"
+                CornerRadius="15"
+                Width="300"
+                Height="180"
+                ZIndex="999">
+
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="8">
+
+                    <TextBlock
+                        Text="⏸"
+                        FontSize="48"
+                        HorizontalAlignment="Center"
+                        Foreground="#00F0FF"/>
+
+                    <TextBlock
+                        Text="JOGO PAUSADO"
+                        FontSize="24"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"
+                        Foreground="White"/>
+
+                    <TextBlock
+                        Text="Pressione P para continuar"
+                        FontSize="13"
+                        HorizontalAlignment="Center"
+                        Foreground="#AAAAAA"/>
+
+                </StackPanel>
+            </Border>
+            
+            <Canvas x:Name="PlayerShip" Canvas.Left="180" Canvas.Top="500" Width="44" Height="52" RenderTransformOrigin="50%,50%">
+                <Canvas.RenderTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Canvas.RenderTransform>
+                <Polygon Points="17,42 22,54 27,42" Fill="#FF6600"/>
+                <Polygon Points="22,2 44,38 36,44 22,34 8,44 0,38" Fill="#0A1A2F" Stroke="#00FFFF" StrokeThickness="1.5"/>
+                <Polygon Points="22,0 32,28 22,38 12,28" Fill="#00F0FF"/>
+                <Polygon Points="22,8 27,20 22,26 17,20" Fill="#FFFFFF"/>
+            </Canvas>
+        </Canvas>
+
+        <Grid Margin="20,20,20,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Spacing="8" Width="210">
+                <Border Background="#B3080C1E" BorderBrush="#00FFFF" BorderThickness="1" CornerRadius="10" Padding="12,6">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#00FFFF" BlurRadius="8" Opacity="0.3" OffsetX="0" OffsetY="0"/>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                        <TextBlock Text="PONTOS" Foreground="#80E0FF" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" LetterSpacing="1"/>
+                        <TextBlock x:Name="TxtScore" Text="000000" Foreground="#00FFFF" FontWeight="Black" FontSize="18"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#B3080C1E" BorderBrush="#FF0055" BorderThickness="1" CornerRadius="10" Padding="12,8">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#FF0055" BlurRadius="8" Opacity="0.3" OffsetX="0" OffsetY="0"/>
+                    </Border.Effect>
+                    <Grid ColumnDefinitions="Auto, *">
+                        <TextBlock Grid.Column="0" Text="❤️" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        
+                        <StackPanel Grid.Column="1" Spacing="3" VerticalAlignment="Center">
+                            <Grid ColumnDefinitions="*,*">
+                                <TextBlock Grid.Column="0" Text="VIDAS" Foreground="#A0FFFFFF" FontSize="8" FontWeight="Bold"/>
+                                <TextBlock Grid.Column="1" x:Name="TxtLivesCount" Text="3/3" Foreground="#00F0FF" FontSize="8" FontWeight="Bold" TextAlignment="Right"/>
+                            </Grid>
+                            
+                            <UniformGrid x:Name="PanelBlocosVidas" Columns="10" Height="8" Margin="0,2,0,0">
+                            </UniformGrid>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <Border Grid.Column="2" Background="#CC0D081D" BorderBrush="#A855F7" BorderThickness="1.5" CornerRadius="14" Padding="12,8" Width="170">
+                <Border.Effect>
+                    <DropShadowEffect Color="#A855F7" BlurRadius="12" Opacity="0.4" OffsetX="0" OffsetY="0"/>
+                </Border.Effect>
+                <Grid ColumnDefinitions="Auto, *" VerticalAlignment="Center">
+                    <Border Grid.Column="0" Width="40" Height="40" Background="#24152F" BorderBrush="#00FFFF" BorderThickness="1" CornerRadius="20" Margin="0,0,10,0">
+                        <TextBlock x:Name="TxtObjetoIcone" Text="👾" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="1">
+                        <TextBlock Text="OBJETO IA" Foreground="#D8B4FE" FontSize="8" FontWeight="Bold" LetterSpacing="0.5"/>
+                        <TextBlock x:Name="TxtObjetoNome" Text="OBJETO" Foreground="#00F0FF" FontSize="11" FontWeight="Black" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+<Border
+    x:Name="GameOverOverlay"
+    Background="#EE030308"
+    IsVisible="False"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch">
+
+    <Border
+    MaxWidth="420"
+    MaxHeight="590"
+    Width="420"
+    Padding="14"
+    Background="#0A0815"
+    BorderBrush="#5B4BFF"
+    BorderThickness="2"
+    CornerRadius="18"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center">
+
+        <Border.Effect>
+            <DropShadowEffect
+                Color="#4C6FFF"
+                BlurRadius="40"
+                Opacity="0.55"
+                OffsetX="0"
+                OffsetY="0"/>
+        </Border.Effect>
+
+        <Grid
+            RowDefinitions="Auto,Auto,*,Auto,Auto"
+            RowSpacing="8">
+
+            <Grid
+                Grid.Row="0"
+                ColumnDefinitions="*,Auto"
+                Margin="4,2,4,6">
+
+                <StackPanel
+                    Grid.Column="0"
+                    Spacing="2">
+
+                    <TextBlock
+                        Text="✦ CONQUISTA DESBLOQUEADA ✦"
+                        Foreground="#67E8F9"
+                        FontSize="10"
+                        FontWeight="Black"
+                        LetterSpacing="1"/>
+
+                    <TextBlock
+                        Text="FEC 2026"
+                        Foreground="#F5F3FF"
+                        FontSize="15"
+                        FontWeight="Black"/>
+
+                </StackPanel>
+
+                <Border
+                    Grid.Column="1"
+                    Width="40"
+                    Height="40"
+                    Background="#11162E"
+                    BorderBrush="#7C5CFF"
+                    BorderThickness="1.5"
+                    CornerRadius="20">
+
+                    <TextBlock
+                        Text="✦"
+                        Foreground="#A78BFA"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                </Border>
+
+            </Grid>
+
+<Border
+    Grid.Row="1"
+    Margin="0,8,0,8"
+    Width="220"
+    Height="190"
+    Background="#F5F7FA"
+    BorderBrush="#67E8F9"
+    BorderThickness="2"
+    CornerRadius="14"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center">
+
+    <Border.Effect>
+        <DropShadowEffect
+            Color="#67E8F9"
+            BlurRadius="20"
+            Opacity="0.45"
+            OffsetX="0"
+            OffsetY="0"/>
+    </Border.Effect>
+
+    <Image
+        x:Name="ImagemObjetoConquista"
+        Width="160"
+        Height="160"
+        Stretch="Uniform"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"/>
+</Border>
+
+            <Border
+                Grid.Row="2"
+                Margin="0,4,0,4"
+                Padding="11"
+                Background="#0E0A1C"
+                BorderBrush="#32266B"
+                BorderThickness="1"
+                CornerRadius="10"
+                VerticalAlignment="Center">
+
+                <StackPanel Spacing="5">
+
+                    <TextBlock
+                        Text="AGRADECEMOS A SUA PARTICIPAÇÃO!"
+                        Foreground="#5EEAD4"
+                        FontSize="10"
+                        FontWeight="Bold"/>
+
+                    <TextBlock
+                        Text="A Engenharia de Computação une hardware e software para projetar sistemas inteligentes. Ela é essencial para desenvolver dispositivos, redes e aplicações que sustentam a tecnologia e a inteligência artificial."
+                        Foreground="#A5B4FC"
+                        FontSize="10"
+                        TextWrapping="Wrap"
+                        LineHeight="14"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <Grid
+                Grid.Row="3"
+                ColumnDefinitions="*,Auto"
+                Margin="0,0,0,6">
+
+                <Border
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    Padding="7"
+                    Background="#0C1423"
+                    BorderBrush="#1F6F86"
+                    BorderThickness="1"
+                    CornerRadius="7">
+
+                    <TextBlock
+                        Text="SISTEMA ENCERRADO"
+                        Foreground="#67E8F9"
+                        FontSize="9"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    Padding="7"
+                    Background="#17122B"
+                    BorderBrush="#5B4BFF"
+                    BorderThickness="1"
+                    CornerRadius="7">
+
+                    <TextBlock
+                        Text="FEC 2026"
+                        Foreground="#C4B5FD"
+                        FontSize="9"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                </Border>
+
+            </Grid>
+
+            <Button
+                Grid.Row="4"
+                Height="46"
+                Content="JOGAR NOVAMENTE"
+                Click="BotaoReiniciar_Click"
+                Background="#4338CA"
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="18"
+                VerticalContentAlignment="Center"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                CornerRadius="9"
+                BorderBrush="#67E8F9"
+                BorderThickness="1">
+
+                <Button.Effect>
+                    <DropShadowEffect
+                        Color="#4C6FFF"
+                        BlurRadius="18"
+                        Opacity="0.35"
+                        OffsetX="0"
+                        OffsetY="0"/>
+                </Button.Effect>
+
+            </Button>
+
+        </Grid>
+
+    </Border>
+
+</Border>
+
+</Grid>
+</UserControl>
